@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<?php require_once'action/db_connect.php';?>
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
