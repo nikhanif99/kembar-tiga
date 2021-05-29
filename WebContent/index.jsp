@@ -582,32 +582,28 @@ p.outset {border-style: outset;}
         <th>Name</th>
         <th>Staff Phone Number</th>
         <th>Role</th>
-      
         <th>Action</th>
       </tr>
     </thead>
-    <tbody>
-      <?php
-      $sql = "SELECT * FROM booking ";
-      $result = $connect->query($sql);
-      
+       <%
+try{
+Class.forName("com.mysql.jdbc.Driver");
+Connection conn =DriverManager.getConnection("jdbc:mysql://us-cdbr-east-04.cleardb.com:3306/heroku_950ce46ea6e24b7", "bd654de4d40d99", "9a7d78f4");
+Statement st = con.createStatement();
 
-      if($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-          echo "
-          <script>
-          function confirmation(){
-            if(confirm('Do you really want to remove ?'))
-              return true;
-            return false;
-          }</script>
-          <tr>
-            <td>".$row['bookingID']."</td>
-            <td>".$row['name']."</td>
-            <td>".$row['phone']."</td>
-            <td>".$row['email']."</td>
+ String sql ="SELECT * FROM Staff";
+
+ ResultSet rs = st.executeQuery(sql);
+while(rs.next()){
+%>     
+            
+    <tbody>
+            <td><%=rs.getString("staffID") %></td>
+            <td><%=rs.getString("staffName") %></td>
+            <td><%=rs.getString("staffPhoneNo") %></td>
+            <td><%=rs.getString("staffRole") %></td>
            
-            <td>
+                <td>
               <a href='edit.php?id=".$row['bookingID']."'><button type='button'>Edit</button></a>
               <a href='action/remove.php?id=".$row['bookingID']."' onclick='return confirmation()'><button type='button'>Remove</button></a>
             </td>
