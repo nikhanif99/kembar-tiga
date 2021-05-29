@@ -1,9 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
- <style>
+<link rel="stylesheet" href="css/style.css"/>
+<%@page import="java.sql.*"%>
+	<%
+	String id = request.getParameter("id");
+	String driver = "com.mysql.jdbc.Driver";
+	String connectionUrl = "jdbc:mysql://us-cdbr-east-04.cleardb.com:3306/";
+	String database = "heroku_950ce46ea6e24b7";
+	String userid = "bd654de4d40d99";
+	String password = "9a7d78f4";
+	
+	try {
+	Class.forName(driver);
+	} 
+	catch (ClassNotFoundException e) {
+	e.printStackTrace();
+	}
+	
+	Connection connection = null;
+	Statement statement = null;
+	ResultSet resultSet = null;
+	%>
+	<%
+	try{
+	connection = DriverManager.getConnection(connectionUrl+database, userid, password);
+	statement=connection.createStatement();
+	String sql ="select * from staff where staffID="+id;
+	resultSet = statement.executeQuery(sql);
+	
+	while(resultSet.next()){
+	%>
+	
+	<!DOCTYPE html>
+	
+	<html>
+	 <style>
     * {
       box-sizing: border-box;
     }
@@ -151,28 +180,25 @@
       width: 505px;
     }
   </style>
-<meta charset="ISO-8859-1">
-<title>Kembar Tiga</title>
-</head>
-<center>
-<body background="camerabg2.jpg" style="background-repeat:no-repeat; background-cover:cover; background-attachment:fixed; background-size:cover">
- <div class="container" align="center" style="margin-top:50px">
+ <center>
+	<body background="camerabg2.jpg" style="background-repeat:no-repeat; background-cover:cover; background-attachment:fixed; background-size:cover">
+	<div class="container" align="center" style="margin-top:50px">
+	<form action="updateProcess.jsp" method="POST">
 
-<form action="AddStaff.jsp" method="POST" style="margin:20px">
-<h1>Add New Staff</h1><br>
+<h1>Update Staff Detail</h1><br>
 <fieldset STYLE="TEXT-ALIGN:CENTER; width:500px;">
 
-<label for="id"><b>Enter Staff ID</b></label><br>
-<input type="text" placeholder="Staff ID" name="id" required><br><br>
+<label for="id"><b>Staff ID</b></label><br>
+<input type="text" placeholder="Staff ID" name="id" value="<%=resultSet.getString("staffID")%>" readonly><br><br>
 
 <label for="name"><b>Enter Staff Name</b></label><br>
-<input type="text" placeholder="Staff Name" name="name" required><br><br>
+<input type="text" placeholder="Staff Name" name="name" value="<%=resultSet.getString("staffName") %>"><br><br>
 
 <label for="phone"><b>Enter Staff Phone Number</b></label><br>
-<input type="text" placeholder="Phone Number" name="phone" required><br><br>
+<input type="text" placeholder="Phone Number" name="phone" value="<%=resultSet.getString("staffPhoneNo") %>"><br><br>
 
 <label for="role"><b>Enter Staff Role</b></label><br>
-<input type="text" placeholder="Staff Role" name="role" required><br><br>
+<input type="text" placeholder="Staff Role" name="role" value="<%=resultSet.getString("staffRole") %>"><br><br>
 
 <input type="submit" value="SUBMIT">
 <input type="reset" value="RESET">
@@ -180,6 +206,14 @@
 
 </form>
 </div>
-</body>
-</center>
-</html>
+	<%
+	}
+	connection.close();
+	} catch (Exception e) {
+	e.printStackTrace();
+	}
+	%>
+
+	</body>
+<center>
+	</html>
