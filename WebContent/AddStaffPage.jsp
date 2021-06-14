@@ -162,16 +162,18 @@
 <h1>Add New Staff</h1><br>
 <fieldset STYLE="TEXT-ALIGN:CENTER; width:500px;">
 
-<label for="id"><b>Enter Staff ID</b></label><br>
+<h2> Please fill the form below.</h2>
+
+<label for="id"><b>Staff ID</b></label><br>
 <input type="text" placeholder="Staff ID" name="id" required><br><br>
 
-<label for="name"><b>Enter Staff Name</b></label><br>
+<label for="name"><b>Staff Name</b></label><br>
 <input type="text" placeholder="Staff Name" name="name" required><br><br>
 
-<label for="phone"><b>Enter Staff Phone Number</b></label><br>
+<label for="phone"><b>Staff Phone Number</b></label><br>
 <input type="text" placeholder="Phone Number" name="phone" required><br><br>
 
-<label for="role"><b>Enter Staff Role</b></label><br>
+<label for="role"><b>Staff Role</b></label><br>
 <input type="text" placeholder="Staff Role" name="role" required><br><br>
 
 <input type="submit" value="SUBMIT">
